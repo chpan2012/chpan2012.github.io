@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CHING-HENG PAN",
+    "section": "",
+    "text": "Welcome to my website\n\nplot(iris, col=\"orange\", pch=20, cex=.8)"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I am an associate professor at GINPPA, NCHU.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "Projects.html",
+    "href": "Projects.html",
+    "title": "CHING-HENG PAN",
+    "section": "",
+    "text": "library(ggplot2)\n\nWarning: package 'ggplot2' was built under R version 4.3.3\n\n# Basic scatter plot\nggplot(data = mtcars, aes(x = wt, y = mpg)) +\n  geom_point(size = 2, shape = 21, col=\"red\", fill=\"lightblue\") + \n  geom_smooth(method = \"lm\", se = FALSE, color = \"red\", linetype = \"dashed\", size = 1)+\n  xlab(\"Vehicle Weight\") + \n  ylab(\"Miles per Gallon (MPG)\") +\n  theme_bw()\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\n\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\nlibrary(plotly)\n\nWarning: package 'plotly' was built under R version 4.3.3\n\n\n\nAttaching package: 'plotly'\n\nThe following object is masked from 'package:ggplot2':\n\n    last_plot\n\nThe following object is masked from 'package:stats':\n\n    filter\n\nThe following object is masked from 'package:graphics':\n\n    layout\n\n# Create a ggplot object\np &lt;- ggplot(mtcars, aes(x = wt, y = mpg)) +\n  geom_point(size = .8, shape = 21, color = \"steelblue\", fill = \"lightblue\")  +\n  xlab(\"Vehicle Weight\") + \n  theme_bw()\n\n# Convert the ggplot object to an interactive plot\nggplotly(p)\n\n\n\n\n\n\n# Bar chart of diamond cuts\nggplot(diamonds, aes(x = cut)) +\n  geom_bar(fill = \"skyblue\") +\n  theme_bw()\n\n\n\n\n\n\n\n\n\n# Convert ggplot bar chart to interactive plot\np_bar &lt;- ggplot(diamonds, aes(x = cut)) +\n  geom_bar(fill = \"skyblue\") +\n  theme_bw()\n\nggplotly(p_bar)\n\n\n\n\n\n\n# install.packages(c(\"plotly\",\"tidyverse\",\"RColrBrewer\"))\nlibrary(plotly)\nlibrary(tidyverse)\n\nWarning: package 'tidyverse' was built under R version 4.3.3\n\n\nWarning: package 'tibble' was built under R version 4.3.3\n\n\nWarning: package 'tidyr' was built under R version 4.3.3\n\n\nWarning: package 'readr' was built under R version 4.3.3\n\n\nWarning: package 'purrr' was built under R version 4.3.3\n\n\nWarning: package 'dplyr' was built under R version 4.3.3\n\n\nWarning: package 'stringr' was built under R version 4.3.3\n\n\nWarning: package 'forcats' was built under R version 4.3.3\n\n\nWarning: package 'lubridate' was built under R version 4.3.3\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ lubridate 1.9.3     ✔ tibble    3.2.1\n✔ purrr     1.0.2     ✔ tidyr     1.3.1\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks plotly::filter(), stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n# Reading in example dataset\ndf &lt;- read.csv(\"https://plotly.com/~public.health/17.csv\", skipNul = TRUE, encoding = \"UTF-8\")\n\n# Font management\nlibrary(showtext)\n\nWarning: package 'showtext' was built under R version 4.3.3\n\n\nLoading required package: sysfonts\n\n\nWarning: package 'sysfonts' was built under R version 4.3.3\n\n\nLoading required package: showtextdb\n\n\nWarning: package 'showtextdb' was built under R version 4.3.3\n\nfont_add_google(\"EB Garamond\",\"ebgaramond\")\nt &lt;- list(\n  family = \"ebgaramond\",\n  size = 12)\n\n# Create label function for animation button\nlabels &lt;- function(size, label) {\n  list(\n    args = c(\"xbins.size\", size), \n    label = label, \n    method = \"restyle\"\n  )\n}\n\n# Create Figure object\nfig &lt;- df %&gt;%\n  plot_ly(\n    x = ~date,\n    autobinx = FALSE, \n    autobiny = TRUE, \n    marker = list(color = \"steelblue\"), \n    name = \"date\", \n    type = \"histogram\", \n    xbins = list(\n      end = \"2016-12-31 12:00\", \n      size = \"M1\", \n      start = \"1983-12-31 12:00\"\n    )\n  )\n\n# Configure dropdown menu\nfig &lt;- fig %&gt;% layout(\n  paper_bgcolor = \"white\", \n  plot_bgcolor = \"white\", \n  title = \"&lt;b&gt;Shooting Incidents&lt;/b&gt;&lt;br&gt;Use dropdown to change bin size\", # HTML to separate line\n  xaxis = list(type = 'date'),\n  yaxis = list(title = \"Incidents\"),\n  updatemenus = list(\n    list(\n      x = 0.1, \n      y = 1.15,\n      active = 1, \n      showactive = TRUE,\n      buttons = list(\n        list(method = \"relayout\", args = list(\"xaxis.dtick\", \"D1\"), label = \"Day\"),\n        list(method = \"relayout\", args = list(\"xaxis.dtick\", \"M1\"), label = \"Month\"),\n        list(method = \"relayout\", args = list(\"xaxis.dtick\", \"M6\"), label = \"Half Year\"),\n        list(method = \"relayout\", args = list(\"xaxis.dtick\", \"M12\"), label = \"Year\")\n      )\n    )\n  )\n)\n\nfig &lt;- fig %&gt;% layout(font = t) # Add font to text\n\nfig"
+  },
+  {
+    "objectID": "research.html",
+    "href": "research.html",
+    "title": "Research",
+    "section": "",
+    "text": "My research interests:"
+  }
+]
